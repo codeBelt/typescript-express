@@ -8,13 +8,15 @@ export class ApiRouter {
     }
 
     protected async _starShipRoute(req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> {
+        const requestOptions: request.Options = {
+            resolveWithFullResponse: true,
+            url: 'https://swapi.co/api/starships/9/',
+            method: 'GET',
+            json: true,
+        };
+
         try {
-            const response: request.FullResponse = await request({
-                resolveWithFullResponse: true,
-                url: 'https://swapi.co/api/starships/9/',
-                method: 'GET',
-                json: true,
-            });
+            const response: request.FullResponse = await request(requestOptions);
 
             res.send(response.body);
         } catch (err) {
