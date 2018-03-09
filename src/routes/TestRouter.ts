@@ -3,13 +3,11 @@ import * as express from 'express';
 export class TestRouter {
 
     constructor(router: express.Router) {
-        this._testRoute(router);
+        router.get('/test', this._testRoute.bind(this));
     }
 
-    protected _testRoute(router: express.Router): void {
-        router.get('/test', (request: express.Request, response: express.Response, next: express.NextFunction) => {
-            response.send('OK');
-        });
+    protected _testRoute(request: express.Request, response: express.Response, next: express.NextFunction): void {
+        response.send('OK');
     }
 
 }
