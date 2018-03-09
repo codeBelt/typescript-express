@@ -3,20 +3,16 @@ import * as express from 'express';
 export class ApiRouter {
 
     constructor(router: express.Router) {
-        this._userRoute(router);
-        this._personRoute(router);
+        router.get('/api/user/:id', this._userRoute.bind(this));
+        router.get('/api/person/:id', this._personRoute.bind(this));
     }
 
-    protected _userRoute(router: express.Router): void {
-        router.get('/api/user/:id', (request: express.Request, response: express.Response, next: express.NextFunction) => {
-            response.send('OK');
-        });
+    protected _userRoute(request: express.Request, response: express.Response, next: express.NextFunction): void {
+        response.send('OK User');
     }
 
-    protected _personRoute(router: express.Router): void {
-        router.get('/api/person/:id', (request: express.Request, response: express.Response, next: express.NextFunction) => {
-            response.send('OK');
-        });
+    protected _personRoute(request: express.Request, response: express.Response, next: express.NextFunction): void {
+        response.send('OK Person');
     }
 
 }
